@@ -142,7 +142,11 @@ each run's diff and compressed transcript are in [runs-n20/](runs-n20/).
 - The server is a stub modeled on vLLM v0.10.2's startup, not vLLM; real
   error text differs in detail, and the `/dev/shm` threshold is a modeling
   choice, not a measured vLLM limit.
-- The grader simulates the kubelet; it does not run a cluster.
+- The grader simulates the kubelet; it does not run a cluster. Its
+  service-link injection matches a real kubelet on kind for this task's
+  Service shape ([validation/kind-service-links.md](validation/kind-service-links.md));
+  the launcher, shell and `/dev/shm` logic are not validated against a
+  cluster.
 - The prompt's line about getting it right in one go tells the agent to
   look past the visible error. Without it, grading failures the agent
   cannot observe would be unfair; with it, the task partly tests whether

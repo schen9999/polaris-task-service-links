@@ -57,7 +57,12 @@ edited manifests and:
    ([grader/k8s_env.py](grader/k8s_env.py)): service-link variables for
    every Service in the namespace (skipped under `enableServiceLinks:
    false`), then `envFrom`, then the container's own `env`, then shell
-   `unset`/`export`/`env -u` edits in a wrapper command.
+   `unset`/`export`/`env -u` edits in a wrapper command. The service-link
+   simulation is checked against a real kubelet: on kind v1.36.1 it
+   reproduces all 8 variables line for line, and none under
+   `enableServiceLinks: false`
+   ([v2/validation/kind-service-links.md](v2/validation/kind-service-links.md),
+   pinned by `test_service_links_match_real_kubelet`).
 2. Runs a pristine copy of the server's port resolution
    ([grader/upstream_server.py](grader/upstream_server.py)) against that
    environment, so edits to the agent-visible copy have no effect.
@@ -122,6 +127,8 @@ the one failure with no textual clue.
   Kubernetes service discovery to this error, and this task uses the bare
   parse error.
 - The grader simulates the kubelet's variable injection; it does not run a
-  cluster. It covers the wrapper forms in the table, and a creative
-  wrapper it can't parse fails rather than passes.
+  cluster. The injection itself is validated against a real kubelet on
+  kind for one Service shape (one named TCP port); other shapes rely on the
+  documented rules. It covers the wrapper forms in the table, and a
+  creative wrapper it can't parse fails rather than passes.
 - One task is an anecdote, not a benchmark.
