@@ -1,0 +1,18 @@
+$ kubectl -n models get pods
+NAME                    READY   STATUS             RESTARTS      AGE
+api-7d9c8b6f54-q2xwl    1/1     Running            0             12m
+vllm-6b8f9d7c4d-k8z5p   0/1     CrashLoopBackOff   6 (41s ago)   12m
+
+$ kubectl -n models logs vllm-6b8f9d7c4d-k8z5p
+Traceback (most recent call last):
+  File "/app/model_server.py", line 55, in <module>
+    main()
+    ~~~~^^
+  File "/app/model_server.py", line 49, in main
+    api_port, internal_port = resolve_ports(sys.argv[1:], dict(os.environ))
+                              ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/model_server.py", line 40, in resolve_ports
+    internal = get_vllm_port(env)
+  File "/app/model_server.py", line 26, in get_vllm_port
+    return int(env["VLLM_PORT"])
+ValueError: invalid literal for int() with base 10: 'tcp://10.43.0.2:8000'

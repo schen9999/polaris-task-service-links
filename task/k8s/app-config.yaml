@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+  namespace: models
+data:
+  LOCAL_MODEL_BACKEND: openai
+  LOCAL_MODEL_URL: http://vllm.models.svc:8000
+  LOCAL_MODEL_NAME: financial-lora
