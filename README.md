@@ -89,7 +89,25 @@ python grader/grade.py --task-dir task   # the unedited task: FAIL
 
 | Agent | Model | Date | Graded | Root cause stated correctly | Turns | Notes |
 |---|---|---|---|---|---|---|
-| (not yet run) | | | | | | |
+| Claude Code 2.1.312 (`-p`, file tools + shell) | claude-sonnet-5-5 | 2026-10-27 | PASS | yes | 4 | `enableServiceLinks: false`; ~16 s, $0.086 |
+| Claude Code 2.1.312 (`-p`, file tools + shell) | claude-sonnet-5-5 | 2026-10-27 | PASS | yes | 4 | same fix; ~20 s, $0.087 |
+| Claude Code 2.1.312 (`-p`, file tools + shell) | claude-sonnet-5-5 | 2026-10-27 | PASS | yes | 5 | same fix; ~15 s, $0.088 |
+
+**What the runs show: this version is too easy.** All three runs passed
+in under 20 seconds with one edit. All three read `server/model_server.py`
+on their second call, and that file hands over the answer: its docstring
+explains what `VLLM_PORT` means, and the port-collision check that makes
+`VLLM_PORT: "8000"` fail is right there in the code. Every run named the
+collision and the client URL as reasons to avoid the other fixes, so the
+grader's traps were never tested. A harder version (v2) would:
+
+- drop `server/` entirely, since a user debugging an upstream image has
+  the log, not the source;
+- reproduce the real incident's three stacked failures, where each fix
+  revealed the next: `vllm serve` passed as container `args` to an image
+  whose entrypoint is already the API server ("unrecognized arguments:
+  serve"), then `VLLM_PORT`, then no `/dev/shm`. The agent
+  sees only the first error, and the grader requires all three fixed.
 
 ## Limits
 
