@@ -1,0 +1,8 @@
+$ kubectl -n models get pods
+NAME                    READY   STATUS             RESTARTS      AGE
+api-7d9c8b6f54-q2xwl    1/1     Running            0             12m
+vllm-58c7f4b9d6-rx4tn   0/1     CrashLoopBackOff   5 (38s ago)   12m
+
+$ kubectl -n models logs vllm-58c7f4b9d6-rx4tn
+usage: api_server.py [options] [model_tag]
+api_server.py: error: unrecognized arguments: serve /models/financial-lora

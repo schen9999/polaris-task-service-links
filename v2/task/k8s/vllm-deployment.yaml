@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vllm
+  namespace: models
+  labels:
+    app: vllm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vllm
+  template:
+    metadata:
+      labels:
+        app: vllm
+    spec:
+      containers:
+        - name: vllm
+          image: vllm/vllm-openai:v0.10.2
+          args:
+            - vllm
+            - serve
+            - /models/financial-lora
+            - --served-model-name
+            - financial-lora
+            - --port
+            - "8000"
+            - --max-model-len
+            - "4096"
+            - --gpu-memory-utilization
+            - "0.85"
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: HF_HUB_OFFLINE
+              value: "1"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          resources:
+            limits:
+              nvidia.com/gpu: 1
+          volumeMounts:
+            - name: model
+              mountPath: /models/financial-lora
+              readOnly: true
+      volumes:
+        - name: model
+          hostPath:
+            path: /home/ubuntu/models/qwen-ft
+            type: Directory
