@@ -139,6 +139,36 @@ CASES = [
 ]
 
 
+KIND_CAPTURE = """\
+VLLM_PORT=tcp://10.96.11.73:8000
+VLLM_PORT_8000_TCP=tcp://10.96.11.73:8000
+VLLM_PORT_8000_TCP_ADDR=10.96.11.73
+VLLM_PORT_8000_TCP_PORT=8000
+VLLM_PORT_8000_TCP_PROTO=tcp
+VLLM_SERVICE_HOST=10.96.11.73
+VLLM_SERVICE_PORT=8000
+VLLM_SERVICE_PORT_8000_8000=8000
+"""
+
+
+def test_service_links_match_real_kubelet() -> None:
+    """The simulation must reproduce a real kubelet (v2/validation/kind-service-links.md).
+
+    The Service is what `kubectl create service clusterip vllm --tcp=8000:8000`
+    creates: one TCP port named "8000-8000", cluster IP from the capture.
+    """
+    from k8s_env import container_env, service_link_env
+
+    svc = {"metadata": {"name": "vllm"},
+           "spec": {"clusterIP": "10.96.11.73",
+                    "ports": [{"name": "8000-8000", "port": 8000, "targetPort": 8000, "protocol": "TCP"}]}}
+    real = dict(line.split("=", 1) for line in KIND_CAPTURE.splitlines())
+    assert service_link_env([svc]) == real
+    # enableServiceLinks: false -> no VLLM_* variables, as in the capture
+    pod = {"enableServiceLinks": False}
+    assert not [k for k in container_env(pod, {}, [svc], {}) if k.startswith("VLLM_")]
+
+
 @pytest.mark.parametrize("name,edit,expected,stage", CASES, ids=[c[0] for c in CASES])
 def test_case(tmp_path: Path, name, edit, expected, stage) -> None:
     work = tmp_path / "task"
