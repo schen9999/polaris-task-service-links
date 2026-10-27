@@ -1,0 +1,33 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..a66e873 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -18,9 +18,9 @@ spec:
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
++          # The image's ENTRYPOINT is already the OpenAI API server, so args
++          # are its arguments: no "vllm serve" prefix (that caused the crash).
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,8 +49,16 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            # Equivalent of docker's --ipc=host: vLLM needs more shared memory
++            # than the 64Mi default /dev/shm of a pod.
++            - name: dshm
++              mountPath: /dev/shm
+       volumes:
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft
+             type: Directory
++        - name: dshm
++          emptyDir:
++            medium: Memory
++            sizeLimit: 8Gi

@@ -1,0 +1,54 @@
+diff --git a/k8s/app-config.yaml b/k8s/app-config.yaml
+index f89a1ad..b7ce83e 100644
+--- a/k8s/app-config.yaml
++++ b/k8s/app-config.yaml
+@@ -5,5 +5,5 @@ metadata:
+   namespace: models
+ data:
+   LOCAL_MODEL_BACKEND: openai
+-  LOCAL_MODEL_URL: http://vllm.models.svc:8000
++  LOCAL_MODEL_URL: http://vllm.models.svc:8000/v1
+   LOCAL_MODEL_NAME: financial-lora
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..825a1d6 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -7,6 +7,10 @@ metadata:
+     app: vllm
+ spec:
+   replicas: 1
++  # One GPU: a rolling update would leave the new pod Pending while the old
++  # pod still holds nvidia.com/gpu. Tear down the old pod first.
++  strategy:
++    type: Recreate
+   selector:
+     matchLabels:
+       app: vllm
+@@ -18,9 +22,9 @@ spec:
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
++          # The image's ENTRYPOINT is already the OpenAI API server, so args
++          # start at the model path (same as the working `docker run`).
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,7 +53,15 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            # Equivalent of `docker run --ipc=host`: the default 64Mi /dev/shm
++            # is too small for PyTorch/NCCL shared memory.
++            - name: dshm
++              mountPath: /dev/shm
+       volumes:
++        - name: dshm
++          emptyDir:
++            medium: Memory
++            sizeLimit: 2Gi
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft

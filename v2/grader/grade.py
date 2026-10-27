@@ -135,19 +135,38 @@ def _find(objs, kind, pred=lambda o: True):
 
 
 def load_objects(task_dir: Path) -> list[dict[str, Any]]:
+    """What `kubectl apply -k k8s/` would create, for the kustomize features
+    the task needs: `resources` (only listed files are applied) and
+    `configMapGenerator` literals. Patches and overlays are not supported;
+    a kustomization using them is reported, not silently mis-graded."""
+    k8s = task_dir / "k8s"
+    kfile = next((p for p in (k8s / "kustomization.yaml", k8s / "kustomization.yml") if p.exists()), None)
+    kust = yaml.safe_load(kfile.read_text()) if kfile else {}
+    unsupported = [k for k in ("patches", "patchesStrategicMerge", "patchesJson6902", "components", "replacements") if kust.get(k)]
+    if unsupported:
+        raise ValueError(f"kustomization uses unsupported features: {unsupported}")
+    files = [k8s / r for r in kust.get("resources", [])] if kfile else sorted(k8s.glob("*.y*ml"))
     objs: list[dict[str, Any]] = []
-    for path in sorted((task_dir / "k8s").glob("*.y*ml")):
-        if path.name.startswith("kustomization"):
-            continue
+    for path in files:
         for doc in yaml.safe_load_all(path.read_text()):
             if isinstance(doc, dict) and doc.get("kind"):
                 objs.append(doc)
+    for gen in kust.get("configMapGenerator") or []:
+        data = {}
+        for lit in gen.get("literals") or []:
+            k, _, v = str(lit).partition("=")
+            data[k] = v
+        objs.append({"kind": "ConfigMap", "metadata": {"name": gen["name"], "namespace": kust.get("namespace", NS)}, "data": data})
     return objs
 
 
 def grade(task_dir: Path) -> dict[str, Any]:
     stub = _load_stub()
-    objs = load_objects(task_dir)
+    try:
+        objs = load_objects(task_dir)
+    except ValueError as e:  # flagged for a human, never silently scored
+        return {"pass": False, "first_failing_stage": "ungradable",
+                "checks": [{"check": "gradable", "pass": False, "detail": str(e)}]}
     services = _find(objs, "Service", lambda o: o["metadata"].get("namespace", NS) == NS)
     configmaps = {o["metadata"]["name"]: (o.get("data") or {}) for o in _find(objs, "ConfigMap")}
     checks: list[dict[str, Any]] = []

@@ -1,0 +1,34 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..6bf2ab6 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -18,9 +18,10 @@ spec:
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
++          # The image's ENTRYPOINT already runs the OpenAI API server, so
++          # args are the server's own flags, exactly as in the working
++          # `docker run` line (no `vllm serve` prefix).
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,8 +50,16 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            # Equivalent of `docker run --ipc=host`: vLLM uses shared memory,
++            # and the Kubernetes default /dev/shm is only 64Mi.
++            - name: dshm
++              mountPath: /dev/shm
+       volumes:
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft
+             type: Directory
++        - name: dshm
++          emptyDir:
++            medium: Memory
++            sizeLimit: 8Gi

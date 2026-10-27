@@ -1,0 +1,33 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..3c2a84b 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -7,6 +7,10 @@ metadata:
+     app: vllm
+ spec:
+   replicas: 1
++  # One GPU, so the old pod must exit before the new one can claim it.
++  # The default RollingUpdate surges a second pod that stays Pending.
++  strategy:
++    type: Recreate
+   selector:
+     matchLabels:
+       app: vllm
+@@ -15,12 +19,15 @@ spec:
+       labels:
+         app: vllm
+     spec:
++      # Same as `docker run --ipc=host`: vLLM needs more shared memory than
++      # the container's default 64 MiB /dev/shm.
++      hostIPC: true
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
++          # The image's ENTRYPOINT is already the OpenAI API server, so args
++          # are passed to it directly. Do not prefix with `vllm serve`.
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora

@@ -1,0 +1,49 @@
+| Model | n | Pass | Pass rate (95% CI) | Fixed args | Fixed VLLM_PORT | Fixed /dev/shm | Median turns | Median s | Mean $ |
+|---|---|---|---|---|---|---|---|---|---|
+| claude-haiku-5-5 | 19 | 0 | 0% (0%–17%) | 19/19 | 0/19 | 19/19 | 7 | 33.3 | 0.009 |
+| claude-opus-5-5 | 20 | 8 | 40% (22%–61%) | 20/20 | 8/20 | 20/20 | 4 | 40.7 | 0.236 |
+| claude-sonnet-5-5 | 20 | 9 | 45% (26%–66%) | 20/20 | 9/20 | 20/20 | 4 | 28.3 | 0.097 |
+
+Failed runs:
+  claude-haiku-5-5 run1: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run2: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run3: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run4: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run5: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run6: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run7: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run8: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run9: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run10: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run11: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run12: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run13: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run14: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run15: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run16: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run17: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run19: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-haiku-5-5 run20: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run1: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run2: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run3: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run4: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run5: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run8: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run11: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run12: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run14: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run16: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run19: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-opus-5-5 run20: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run3: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run4: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run5: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run6: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run7: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run8: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run9: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run14: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run15: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run17: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True
+  claude-sonnet-5-5 run19: first failing stage vllm_port, failed checks ['server_starts', 'api_port_unchanged', 'serves_expected_model'], missed ['port'], completed=True

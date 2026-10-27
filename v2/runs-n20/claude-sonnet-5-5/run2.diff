@@ -1,0 +1,36 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..271d251 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -15,12 +15,13 @@ spec:
+       labels:
+         app: vllm
+     spec:
++      # Service "vllm" would otherwise inject VLLM_PORT=tcp://<ip>:8000 into this pod,
++      # which vLLM reads as its own config and rejects.
++      enableServiceLinks: false
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,8 +50,15 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            # replaces `docker run --ipc=host`; the default 64Mi /dev/shm is too small
++            - name: shm
++              mountPath: /dev/shm
+       volumes:
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft
+             type: Directory
++        - name: shm
++          emptyDir:
++            medium: Memory
++            sizeLimit: 8Gi

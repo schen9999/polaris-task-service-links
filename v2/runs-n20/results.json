@@ -1,0 +1,996 @@
+[
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run1",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 9,
+    "cost_usd": 0.01092456,
+    "seconds": 35.8,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run2",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 6,
+    "cost_usd": 0.00762112,
+    "seconds": 26.2,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run3",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 9,
+    "cost_usd": 0.01053349,
+    "seconds": 35.4,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run4",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 7,
+    "cost_usd": 0.00781796,
+    "seconds": 25.2,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run5",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 7,
+    "cost_usd": 0.00981703,
+    "seconds": 36.8,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run6",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 9,
+    "cost_usd": 0.010075730000000001,
+    "seconds": 35.6,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run7",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 8,
+    "cost_usd": 0.008734229999999999,
+    "seconds": 32.2,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run8",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 8,
+    "cost_usd": 0.009105090000000001,
+    "seconds": 30.5,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run9",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 7,
+    "cost_usd": 0.00936229,
+    "seconds": 33.3,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run10",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 7,
+    "cost_usd": 0.00884763,
+    "seconds": 29.9,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run11",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 7,
+    "cost_usd": 0.00895364,
+    "seconds": 30.1,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run12",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 8,
+    "cost_usd": 0.01062783,
+    "seconds": 39.7,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run13",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 7,
+    "cost_usd": 0.008970120000000002,
+    "seconds": 31.4,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run14",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 7,
+    "cost_usd": 0.00921293,
+    "seconds": 33.8,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run15",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 8,
+    "cost_usd": 0.009228529999999999,
+    "seconds": 31.3,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run16",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 6,
+    "cost_usd": 0.0091523,
+    "seconds": 34.1,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run17",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 9,
+    "cost_usd": 0.0100274,
+    "seconds": 36.4,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run19",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 9,
+    "cost_usd": 0.00986496,
+    "seconds": 34.5,
+    "completed": true
+  },
+  {
+    "model": "claude-haiku-5-5",
+    "run": "run20",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 7,
+    "cost_usd": 0.00868455,
+    "seconds": 31.9,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run1",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.24802190000000002,
+    "seconds": 44.3,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run2",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.2753029,
+    "seconds": 47.0,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run3",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.22823790000000002,
+    "seconds": 41.4,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run4",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 5,
+    "cost_usd": 0.2593549,
+    "seconds": 42.8,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run5",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 6,
+    "cost_usd": 0.2968709,
+    "seconds": 61.2,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run6",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.2151325,
+    "seconds": 36.5,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run7",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.21721669999999998,
+    "seconds": 35.8,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run8",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 3,
+    "cost_usd": 0.2230257,
+    "seconds": 42.2,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run9",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.21301340000000002,
+    "seconds": 37.4,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run10",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.2229177,
+    "seconds": 38.8,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run11",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.2458079,
+    "seconds": 40.8,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run12",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.22138950000000002,
+    "seconds": 37.5,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run13",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 3,
+    "cost_usd": 0.2131771,
+    "seconds": 38.3,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run14",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.22855070000000002,
+    "seconds": 40.7,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run15",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.21673770000000003,
+    "seconds": 36.7,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run16",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 5,
+    "cost_usd": 0.25141270000000004,
+    "seconds": 46.1,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run17",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.2472597,
+    "seconds": 41.9,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run18",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.2428693,
+    "seconds": 38.4,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run19",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.21671230000000002,
+    "seconds": 37.6,
+    "completed": true
+  },
+  {
+    "model": "claude-opus-5-5",
+    "run": "run20",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.23123350000000004,
+    "seconds": 39.8,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run1",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 6,
+    "cost_usd": 0.10883129999999999,
+    "seconds": 46.3,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run2",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 5,
+    "cost_usd": 0.1106514,
+    "seconds": 41.0,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run3",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.0960869,
+    "seconds": 33.5,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run4",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.0962254,
+    "seconds": 28.0,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run5",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.0928568,
+    "seconds": 26.4,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run6",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 3,
+    "cost_usd": 0.08664490000000001,
+    "seconds": 34.0,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run7",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.09468309999999999,
+    "seconds": 36.8,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run8",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 5,
+    "cost_usd": 0.0987894,
+    "seconds": 28.8,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run9",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.0928065,
+    "seconds": 26.9,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run10",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 5,
+    "cost_usd": 0.111167,
+    "seconds": 28.2,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run11",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.09517609999999999,
+    "seconds": 32.8,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run12",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 5,
+    "cost_usd": 0.1191228,
+    "seconds": 35.0,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run13",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 3,
+    "cost_usd": 0.0863407,
+    "seconds": 21.9,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run14",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 5,
+    "cost_usd": 0.0956134,
+    "seconds": 25.5,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run15",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 3,
+    "cost_usd": 0.0823082,
+    "seconds": 20.9,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run16",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.09517429999999999,
+    "seconds": 23.9,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run17",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.0945969,
+    "seconds": 28.2,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run18",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 5,
+    "cost_usd": 0.0996602,
+    "seconds": 35.2,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run19",
+    "pass": false,
+    "first_failing_stage": "vllm_port",
+    "failed_checks": [
+      "server_starts",
+      "api_port_unchanged",
+      "serves_expected_model"
+    ],
+    "fixed_args": true,
+    "fixed_port": false,
+    "fixed_shm": true,
+    "turns": 4,
+    "cost_usd": 0.0925086,
+    "seconds": 27.1,
+    "completed": true
+  },
+  {
+    "model": "claude-sonnet-5-5",
+    "run": "run20",
+    "pass": true,
+    "first_failing_stage": null,
+    "failed_checks": [],
+    "fixed_args": true,
+    "fixed_port": true,
+    "fixed_shm": true,
+    "turns": 5,
+    "cost_usd": 0.1006182,
+    "seconds": 28.3,
+    "completed": true
+  }
+]

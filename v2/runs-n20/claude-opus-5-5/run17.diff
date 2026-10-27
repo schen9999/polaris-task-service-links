@@ -1,0 +1,50 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..fc583f4 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -7,6 +7,10 @@ metadata:
+     app: vllm
+ spec:
+   replicas: 1
++  # One GPU per node: a surge pod would sit Pending waiting for the GPU the
++  # old pod still holds, so replace the pod instead of rolling it.
++  strategy:
++    type: Recreate
+   selector:
+     matchLabels:
+       app: vllm
+@@ -15,12 +19,15 @@ spec:
+       labels:
+         app: vllm
+     spec:
++      # The `vllm` Service would otherwise inject VLLM_PORT=tcp://<ip>:8000,
++      # which vLLM reads as its own config variable and rejects.
++      enableServiceLinks: false
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
++          # The image entrypoint already runs the OpenAI API server; pass only
++          # its arguments, as in the working `docker run`.
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,8 +56,16 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            # Equivalent of `docker run --ipc=host`: the default 64Mi /dev/shm
++            # is too small for vLLM/PyTorch shared memory.
++            - name: dshm
++              mountPath: /dev/shm
+       volumes:
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft
+             type: Directory
++        - name: dshm
++          emptyDir:
++            medium: Memory
++            sizeLimit: 8Gi

@@ -1,0 +1,54 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..79c74a5 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -7,6 +7,8 @@ metadata:
+     app: vllm
+ spec:
+   replicas: 1
++  strategy:
++    type: Recreate
+   selector:
+     matchLabels:
+       app: vllm
+@@ -15,12 +17,11 @@ spec:
+       labels:
+         app: vllm
+     spec:
++      enableServiceLinks: false
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -36,6 +37,12 @@ spec:
+           env:
+             - name: HF_HUB_OFFLINE
+               value: "1"
++          startupProbe:
++            httpGet:
++              path: /health
++              port: http
++            periodSeconds: 10
++            failureThreshold: 60
+           readinessProbe:
+             httpGet:
+               path: /health
+@@ -49,7 +56,13 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            - name: shm
++              mountPath: /dev/shm
+       volumes:
++        - name: shm
++          emptyDir:
++            medium: Memory
++            sizeLimit: 8Gi
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft

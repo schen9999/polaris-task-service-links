@@ -110,8 +110,10 @@ grader's traps were never tested. A harder version (v2) would:
   sees only the first error, and the grader requires all three fixed.
 
 **v2 is built: [v2/](v2/README.md).** No server source, all three stacked
-failures, only the first one visible. Three Claude Code runs: 2 pass, 1
-fails. The miss was `VLLM_PORT`, the one failure with no textual clue.
+failures, only the first one visible. At 20 runs per model: Sonnet 9/20,
+Opus 8/20, Haiku 0/19. Every one of the 59 valid runs fixed the visible
+error and the `/dev/shm` gap; every failure is the same miss, `VLLM_PORT`,
+the one failure with no textual clue.
 
 ## Limits
 

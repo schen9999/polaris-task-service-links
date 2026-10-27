@@ -1,0 +1,32 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..6b569e8 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -18,9 +18,9 @@ spec:
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
++          # The vllm-openai image's entrypoint is api_server.py, so args start
++          # with the model path. Do not prepend "vllm serve".
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,8 +49,15 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            # Equivalent of --ipc=host in the docker run: vLLM needs more
++            # shared memory than the 64Mi default /dev/shm.
++            - name: dshm
++              mountPath: /dev/shm
+       volumes:
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft
+             type: Directory
++        - name: dshm
++          emptyDir:
++            medium: Memory

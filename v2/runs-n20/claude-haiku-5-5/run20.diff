@@ -1,0 +1,31 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..d5124ea 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -18,9 +18,9 @@ spec:
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
++          # The image's entrypoint is the OpenAI API server itself, so args
++          # start with the model path. Do not prefix with "vllm serve".
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,7 +49,14 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            # Equivalent of `docker run --ipc=host`: the default 64Mi /dev/shm
++            # is too small for vLLM's worker processes and can crash it.
++            - name: dshm
++              mountPath: /dev/shm
+       volumes:
++        - name: dshm
++          emptyDir:
++            medium: Memory
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft

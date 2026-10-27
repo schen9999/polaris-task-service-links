@@ -101,7 +101,29 @@ def port_override_8000(d: Path) -> None:
           lambda doc: _c(doc)["env"].append({"name": "VLLM_PORT", "value": "8000"}))(d)
 
 
+def configmap_via_generator(d: Path) -> None:
+    """Found in a real run (opus run5): config moved into configMapGenerator."""
+    apply(fix_args_drop_serve, fix_links_off, fix_shm_memory)(d)
+    (d / "k8s/app-config.yaml").unlink()
+    k = _load(d, "k8s/kustomization.yaml")
+    k["resources"].remove("app-config.yaml")
+    k["configMapGenerator"] = [{"name": "app-config", "literals": [
+        "LOCAL_MODEL_BACKEND=openai", "LOCAL_MODEL_URL=http://vllm.models.svc:8000", "LOCAL_MODEL_NAME=financial-lora"]}]
+    _save(d, "k8s/kustomization.yaml", k)
+
+
+def unlisted_file_not_applied(d: Path) -> None:
+    """A fix written to a new file that kustomization never lists does nothing."""
+    (d / "k8s/vllm-deployment-fixed.yaml").write_text((d / DEP).read_text())
+    doc = _load(d, "k8s/vllm-deployment-fixed.yaml")
+    for f in (fix_args_drop_serve, fix_links_off, fix_shm_memory):
+        f(doc)
+    _save(d, "k8s/vllm-deployment-fixed.yaml", doc)
+
+
 CASES = [
+    ("configmap_via_generator", configmap_via_generator, True, None),
+    ("unlisted_file_not_applied", unlisted_file_not_applied, False, "args"),
     ("original", lambda d: None, False, "args"),
     ("args_only", apply(fix_args_drop_serve), False, "vllm_port"),
     ("args_and_links", apply(fix_args_drop_serve, fix_links_off), False, "shm"),

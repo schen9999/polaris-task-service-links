@@ -1,0 +1,47 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..68d0feb 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -15,12 +15,13 @@ spec:
+       labels:
+         app: vllm
+     spec:
++      # A Service named "vllm" would inject VLLM_PORT=tcp://<ip>:8000 into the pod,
++      # which vLLM reads as its own VLLM_PORT setting and fails on.
++      enableServiceLinks: false
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -36,6 +37,12 @@ spec:
+           env:
+             - name: HF_HUB_OFFLINE
+               value: "1"
++          startupProbe:
++            httpGet:
++              path: /health
++              port: http
++            periodSeconds: 10
++            failureThreshold: 90
+           readinessProbe:
+             httpGet:
+               path: /health
+@@ -49,7 +56,13 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            # equivalent of --ipc=host: the default 64Mi /dev/shm is too small
++            - name: shm
++              mountPath: /dev/shm
+       volumes:
++        - name: shm
++          emptyDir:
++            medium: Memory
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft

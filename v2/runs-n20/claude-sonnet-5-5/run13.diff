@@ -1,0 +1,32 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..59ec77c 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -15,12 +15,12 @@ spec:
+       labels:
+         app: vllm
+     spec:
++      # Service "vllm" would otherwise inject VLLM_PORT=tcp://<ip>:8000, which vLLM reads as its own port setting
++      enableServiceLinks: false
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,7 +49,12 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            - name: shm
++              mountPath: /dev/shm
+       volumes:
++        - name: shm
++          emptyDir:
++            medium: Memory
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft

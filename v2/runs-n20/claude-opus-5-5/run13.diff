@@ -1,0 +1,47 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..29cedd9 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -7,6 +7,10 @@ metadata:
+     app: vllm
+ spec:
+   replicas: 1
++  # Single GPU: the old pod must release nvidia.com/gpu before the new one can
++  # schedule, so a RollingUpdate surge pod would sit Pending forever.
++  strategy:
++    type: Recreate
+   selector:
+     matchLabels:
+       app: vllm
+@@ -15,12 +19,14 @@ spec:
+       labels:
+         app: vllm
+     spec:
++      # The Service is named "vllm", so service links would inject
++      # VLLM_PORT=tcp://<ip>:8000, which vLLM reads as its own config and rejects.
++      enableServiceLinks: false
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
++          # The image ENTRYPOINT is already the OpenAI api_server; pass only its args.
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,7 +55,14 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            # Equivalent of `docker run --ipc=host`: the default 64Mi /dev/shm is
++            # too small for PyTorch/NCCL shared memory.
++            - name: dshm
++              mountPath: /dev/shm
+       volumes:
++        - name: dshm
++          emptyDir:
++            medium: Memory
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft

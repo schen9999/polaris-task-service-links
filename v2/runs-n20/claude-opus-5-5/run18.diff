@@ -1,0 +1,46 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..0e47c4c 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -7,6 +7,9 @@ metadata:
+     app: vllm
+ spec:
+   replicas: 1
++  # One GPU per node: a surge pod could never schedule next to the old one.
++  strategy:
++    type: Recreate
+   selector:
+     matchLabels:
+       app: vllm
+@@ -15,12 +18,14 @@ spec:
+       labels:
+         app: vllm
+     spec:
++      # The Service is also named "vllm", so service links would inject
++      # VLLM_PORT=tcp://<ip>:8000 etc., which vLLM reads as its own config.
++      enableServiceLinks: false
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
++          # The image entrypoint is already the OpenAI API server; pass only its args.
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,7 +54,14 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            # Equivalent of docker --ipc=host: the 64Mi default /dev/shm is too small.
++            - name: dshm
++              mountPath: /dev/shm
+       volumes:
++        - name: dshm
++          emptyDir:
++            medium: Memory
++            sizeLimit: 8Gi
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft

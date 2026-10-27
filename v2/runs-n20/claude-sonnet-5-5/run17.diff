@@ -1,0 +1,54 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..4a374d3 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -7,6 +7,8 @@ metadata:
+     app: vllm
+ spec:
+   replicas: 1
++  strategy:
++    type: Recreate  # the single GPU must be freed before the new pod can claim it
+   selector:
+     matchLabels:
+       app: vllm
+@@ -19,8 +21,6 @@ spec:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -36,11 +36,16 @@ spec:
+           env:
+             - name: HF_HUB_OFFLINE
+               value: "1"
++          startupProbe:
++            httpGet:
++              path: /health
++              port: http
++            periodSeconds: 10
++            failureThreshold: 90  # up to 15 min for weight loading / compilation
+           readinessProbe:
+             httpGet:
+               path: /health
+               port: http
+-            initialDelaySeconds: 30
+             periodSeconds: 10
+           resources:
+             limits:
+@@ -49,7 +54,13 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            - name: shm
++              mountPath: /dev/shm
+       volumes:
++        - name: shm
++          emptyDir:
++            medium: Memory
++            sizeLimit: 8Gi
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft
