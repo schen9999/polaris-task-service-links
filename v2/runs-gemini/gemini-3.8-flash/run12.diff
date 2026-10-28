@@ -1,0 +1,32 @@
+diff --git a/k8s/vllm-deployment.yaml b/k8s/vllm-deployment.yaml
+index 4ee2bc2..5a608b6 100644
+--- a/k8s/vllm-deployment.yaml
++++ b/k8s/vllm-deployment.yaml
+@@ -15,12 +15,11 @@ spec:
+       labels:
+         app: vllm
+     spec:
++      hostIPC: true
+       containers:
+         - name: vllm
+           image: vllm/vllm-openai:v0.10.2
+           args:
+-            - vllm
+-            - serve
+             - /models/financial-lora
+             - --served-model-name
+             - financial-lora
+@@ -49,8 +48,13 @@ spec:
+             - name: model
+               mountPath: /models/financial-lora
+               readOnly: true
++            - name: shm
++              mountPath: /dev/shm
+       volumes:
+         - name: model
+           hostPath:
+             path: /home/ubuntu/models/qwen-ft
+             type: Directory
++        - name: shm
++          emptyDir:
++            medium: Memory
