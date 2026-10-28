@@ -116,6 +116,45 @@ each run's diff and compressed transcript are in [runs-n20/](runs-n20/).
   break a client which adds `/v1` itself; the grader checks only host and
   port, so it doesn't catch that.
 
+### Gemini 3.8 Flash, 20 runs (2026-10-28)
+
+Run on Sam's laptop with Gemini CLI, one Docker container per run with
+only that run's copy of `task/` mounted (no access to the repository or
+other runs), `--yolo`, model `gemini-3.8-flash`, paid API tier.
+
+| Model | n | Pass | Pass rate (95% CI) | Fixed args | Fixed `VLLM_PORT` | Fixed `/dev/shm` |
+|---|---|---|---|---|---|---|
+| gemini-3.8-flash | 20 | 0 | 0% (0–16%) | 20/20 | 0/20 | 20/20 |
+
+Logs and diffs: [runs-gemini/](runs-gemini/).
+
+- **Same failure as every Claude miss.** All 20 runs fixed the visible
+  argument error and added an in-memory `/dev/shm` (10 also set
+  `hostIPC: true`), and none fixed `VLLM_PORT`. No run's output mentions
+  `VLLM_PORT` or service links at all, so the miss is not a fix attempted
+  and gotten wrong: the problem was never considered.
+- **Against Claude:** 0/20 vs Sonnet 9/20 (p = 0.0012) and Opus 8/20
+  (p = 0.0033), the same as Haiku (0/19). This is Gemini's Flash tier;
+  no Gemini Pro model has been run, so it is not a comparison of the
+  strongest model from each family.
+- 8 runs added `strategy: Recreate`. Every run changed only
+  `k8s/vllm-deployment.yaml`.
+
+**Setup differences from the Claude runs** (both could matter, in
+opposite directions):
+
+- **No shell.** Gemini CLI's policy denied `run_shell_command` in
+  headless mode (every log shows 1 to 5 denied attempts); it worked with
+  file tools only. Claude had a shell. No passing Claude run needed one
+  for the fix, which is a YAML edit, but it narrows what Gemini could
+  inspect.
+- **Web search disabled** (`tools.exclude: google_web_search, web_fetch`),
+  because a search could look up the error and Claude had no web access.
+  Zero web-search calls appear in the 20 logs. In an earlier test run with
+  search enabled, every search call failed with server errors.
+- **Retry policy:** a run would have been retried if the API failed and
+  the agent made no edits; no run needed it. No run was excluded.
+
 **Validity notes**
 
 - **One run excluded (Haiku run18).** It concluded its working directory
